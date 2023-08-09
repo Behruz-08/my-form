@@ -5,29 +5,19 @@ const Form = () => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
-    age: 0,
+    age: "",
     email: "",
     tel: "",
   });
   const [errors, setErrors] = useState({
     firstName: "",
     lastName: "",
-    age: 0,
+    age: "",
     email: "",
     tel: "",
   });
   const [isFormValid, setIsFormValid] = useState(false);
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
-
-  useEffect(() => {
-    setIsFormValid(
-      formData.firstName.trim() !== "" &&
-        !isNaN(formData.age) &&
-        formData.tel.trim() !== "" &&
-        formData.email.trim() !== "" &&
-        /\S+@\S+\.\S+/.test(formData.email.trim())
-    );
-  }, [formData]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -40,42 +30,62 @@ const Form = () => {
   const validateForm = () => {
     let isValid = true;
     let newErrors = {};
-    if (
+
+    // Валидация поля First Name
+
+    if (formData.firstName.trim() === "") {
+      newErrors.firstName = "Введите корректные данные";
+      isValid = false;
+    } else if (
       !/^[a-zA-Z]+$/.test(formData.firstName.trim()) ||
       /\d/.test(formData.firstName.trim())
     ) {
-      newErrors.firstName = " Ошибка!!!Введите корректные данные";
-      isValid = false;
-    } else if (formData.firstName.trim() === "") {
-      newErrors.firstName = "Введите корректные данные";
+      newErrors.firstName = "Ошибка! Введите корректные данные";
       isValid = false;
     }
 
+    // Валидация поля Last Name
     if (formData.lastName.trim() === "") {
-      newErrors.lastName = " Введите корректные данные";
+      newErrors.lastName = "Введите корректные данные";
+      isValid = false;
+    } else if (formData.lastName.length < 3) {
+      newErrors.tel = "ошибка! имя не должно быт менше три букви";
       isValid = false;
     } else if (
       !/^[a-zA-Z]+$/.test(formData.lastName.trim()) ||
       /\d/.test(formData.lastName.trim())
     ) {
-      newErrors.lastName = " Ошибка!!!Введите корректные данные ";
+      newErrors.lastName = "Ошибка! Введите корректные данные";
       isValid = false;
     }
 
-    if (isNaN(formData.age)) {
+    // Валидация поля Age
+    if (isNaN(formData.age) || formData.age.trim() === "") {
       newErrors.age = "Введите корректные данные";
       isValid = false;
-    }
-    if (isNaN(formData.tel)) {
-      newErrors.age = "Введите корректные данные";
+    } else if (formData.age < 16 || formData.age > 70) {
+      newErrors.age = "Возраст должен быть от 16 до 70";
       isValid = false;
     }
 
+    // Валидация поля Telephone
+    if (formData.tel.trim() === "") {
+      newErrors.tel = "Введите номер телефона";
+      isValid = false;
+    } else if (formData.tel.length < 13) {
+      newErrors.tel = "ошибка! не хватает  цифра";
+      isValid = false;
+    } else if (!/^\+992[0-9]{9,}$/.test(formData.tel.trim())) {
+      newErrors.tel = "ошибка! номер должен начатся с +992 ";
+      isValid = false;
+    }
+
+    // Валидация поля Email
     if (formData.email.trim() === "") {
       newErrors.email = "Введите корректные данные";
       isValid = false;
     } else if (!/\S+@\S+\.\S+/.test(formData.email.trim())) {
-      newErrors.email = "Ошибка!!!Введите корректные данные ";
+      newErrors.email = "Ошибка! Введите корректные данные";
       isValid = false;
     }
 
@@ -87,13 +97,12 @@ const Form = () => {
     e.preventDefault();
     if (validateForm()) {
       setIsFormSubmitted(true);
-
       setTimeout(() => {
         setIsFormSubmitted(false);
         setFormData({
           firstName: "",
           lastName: "",
-          age: 0,
+          age: "",
           email: "",
           tel: "",
         });
@@ -103,39 +112,48 @@ const Form = () => {
     }
   };
 
+  useEffect(() => {
+    setIsFormValid(
+      formData.firstName.trim() !== "" &&
+        formData.lastName.trim() !== "" &&
+        !isNaN(formData.age) &&
+        formData.tel.trim() !== "" &&
+        formData.email.trim() !== "" &&
+        /\S+@\S+\.\S+/.test(formData.email.trim())
+    );
+  }, [formData]);
+
   return (
     <form onSubmit={handleSubmit}>
       <div className={style.form}>
         <label>First Name:</label>
         <input
-          // pattern="[A-Za-z]+"
-          required
+          pattern="[A-Za-z]+"
+          required="required"
           type="text"
           name="firstName"
           value={formData.firstName}
           onChange={handleChange}
           onFocus={() => setIsFormSubmitted(false)}
           onBlur={validateForm}
-        />
+        />{" "}
         {errors.firstName && (
           <span className={style.span}>{errors.firstName}</span>
         )}
-
         <label>Last Name:</label>
         <input
-          // pattern="[A-Za-z]+"
-          required
+          pattern="[A-Za-z]+"
+          required="required"
           type="text"
           name="lastName"
           value={formData.lastName}
           onChange={handleChange}
           onFocus={() => setIsFormSubmitted(false)}
           onBlur={validateForm}
-        />
+        />{" "}
         {errors.lastName && (
           <span className={style.span}>{errors.lastName}</span>
         )}
-
         <label>Age:</label>
         <input
           type="number"
@@ -144,9 +162,8 @@ const Form = () => {
           onChange={handleChange}
           onFocus={() => setIsFormSubmitted(false)}
           onBlur={validateForm}
-        />
+        />{" "}
         {errors.age && <span className={style.span}>{errors.age}</span>}
-
         <label>Telephone:</label>
         <input
           type="tel"
@@ -155,9 +172,8 @@ const Form = () => {
           onChange={handleChange}
           onFocus={() => setIsFormSubmitted(false)}
           onBlur={validateForm}
-        />
+        />{" "}
         {errors.tel && <span className={style.span}>{errors.tel}</span>}
-
         <label>Email:</label>
         <input
           type="text"
@@ -166,24 +182,21 @@ const Form = () => {
           onChange={handleChange}
           onFocus={() => setIsFormSubmitted(false)}
           onBlur={validateForm}
-        />
+        />{" "}
         {errors.email && <span className={style.span}>{errors.email}</span>}
-
         <button
           type="submit"
-          // className={`${style.btn}${
-          //   isFormSubmitted ? style.isFormSubmitted : ""
-          // }`}
-          // className={`${style.btn}${isFormSubmitted ? " submit" : ""}${
-          //   isFormValid ? " green" : ""
-          // }`}
-          className={`${style.btn} ${
-            isFormSubmitted || isFormValid ? style.submit : ""
+          className={`${style.btn} ${isFormValid ? style.submit : ""} ${
+            isFormSubmitted ? style.nextSubmit : ""
           }`}
-          disabled={!isFormValid || isFormSubmitted}
-          // disabled={!isFormValid || isFormSubmitted}
+          disabled={!isFormValid}
+          submit={"Форма успешно заполнена"}
         >
-          {isFormSubmitted ? "Форма отправленно успешно!!!" : "Submit"}
+          {isFormSubmitted
+            ? "Форма отправлена успешно!"
+            : isFormValid
+            ? "Форма успешно заполнена"
+            : "Заполните все поля ввода"}
         </button>
       </div>
     </form>
@@ -191,14 +204,3 @@ const Form = () => {
 };
 
 export default Form;
-// formData: объект, содержащий значения полей формы (firstName, lastName, age, email, tel).
-// errors: объект, содержащий сообщения об ошибках для каждого поля формы.
-// isFormValid: булевое значение, указывающее, является ли форма допустимой или нет.
-// isFormSubmitted: булевое значение, указывающее, была ли форма отправлена.
-// Функции:
-
-// useEffect: хук useEffect используется для определения, является ли форма допустимой на основе текущих значений полей formData.
-// handleChange: функция, вызываемая при изменении значения полей формы. Она обновляет значения полей formData соответствующим образом.
-// validateForm: функция, вызываемая при отправке формы. Она проверяет каждое поле формы на наличие ошибок и возвращает true, если форма допустима, и false, если есть ошибки.
-// handleSubmit: функция, вызываемая при отправке формы. Она вызывает функцию validateForm для проверки формы, устанавливает состояние isFormSubmitted в true и сбрасывает значения полей формы после 3 секунд.
-// Компонент отображает поля формы (имя, фамилия, возраст, email, телефон) и кнопку отправки. При вводе данных и получении фокуса каждое поле проверяет ошибки и отображает соответствующее сообщение об ошибке. Кнопка отправки становится доступной только при условии, что форма допустима и еще не была отправлена.

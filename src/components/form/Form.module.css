@@ -8,8 +8,8 @@
   margin: auto;
   margin-top: 10vh;
 
-  border: 0.25em solid #38479e;
-  background-color: #81a3c5;
+  border: 0.25em solid #bee5d9;
+  background-color: #92e5aff0;
   box-shadow: rgba(0, 0, 0, 0.1) -1px inset, -1px inset, #fff;
 }
 #loginForm input[type="text"],
@@ -22,13 +22,13 @@ input[type="email"] {
   line-height: normal;
   transition: all ease-in 0.2s;
   border: none;
-  border-bottom: solid 1px rgb(165, 70, 70);
+  border-bottom: solid 1px rgb(199, 117, 117);
   width: 100%;
   padding: 1%;
 }
 
 .span {
-  color: red;
+  color: rgb(227, 47, 47);
 }
 
 button[type="submit"] {
@@ -40,13 +40,16 @@ button[type="submit"] {
   border: none;
   border-radius: 20px;
   position: relative;
-  /* top: -10px; */
 }
 
 .btn {
-  background-color: rgb(169, 18, 18);
+  background-color: rgb(145, 40, 40);
+  text: 20px;
 }
 
 .submit {
+  background-color: rgb(99, 190, 99);
+}
+.nextSubmit {
   background-color: green;
 }
