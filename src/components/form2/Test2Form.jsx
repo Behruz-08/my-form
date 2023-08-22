@@ -389,7 +389,7 @@ const Test2Form = () => {
   const controlValid =
     formData.firstName.trim() !== "" &&
     formData.lastName.trim() !== "" &&
-    formData.age.trim() !== "" &&
+    formData.age !== "" &&
     formData.tel.trim() !== "" &&
     formData.email.trim() !== "" &&
     Object.values(errors).every((error) => error === "");
