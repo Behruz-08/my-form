@@ -10,19 +10,17 @@ export default function MyForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
     // Обработка отправки формы
     formData.age = parseInt(formData.age);
     // Проверка, если значение age равно -1 или 0, не отправлять форму
     if (formData.age < 0 || formData.age === 0) {
       return;
     }
-    // if (
-    //   email.indexOf("@") === -1 ||
-    //   email.length < 6 ||
-    //   !/[a-zA-Z]/.test(email)
-    // )
-    console.log(formData);
   };
+
+  console.log(formData);
+  // };
 
   // const handleChange = (event) => {
   //   setFormData({ ...formData, [event.target.name]: event.target.value });
@@ -57,6 +55,7 @@ export default function MyForm() {
     }
 
     // Валидация email - используем простейшую проверку наличия символа @
+
     if (name === "email") {
       isValid = value.includes("@");
     }
