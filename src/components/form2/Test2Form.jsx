@@ -43,6 +43,7 @@ export const Test2Form = () => {
         [name]: "",
       }));
     }
+        validateField(name, value);
   };
 
   const validateField = (name, value) => {
