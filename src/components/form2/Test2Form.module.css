@@ -1,0 +1,151 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 40%;
+  height: 100%;
+  margin: auto;
+
+  border: 0.25em solid #000604;
+  background: linear-gradient(
+    90deg,
+    rgb(4, 7, 9),
+    rgb(26, 34, 37),
+    rgb(26, 34, 37),
+    rgb(4, 7, 9)
+  );
+  box-shadow: rgba(0, 0, 0, 0.1) -1px inset, -1px inset, #fff;
+}
+
+input[type="email"] {
+  font-size: large;
+  color: black;
+  text-align: left;
+  outline: none;
+  line-height: normal;
+  transition: all ease-in 0.2s;
+  border: none;
+
+  width: 80%;
+  height: 50px;
+  padding: 5%;
+  border-radius: 100px;
+}
+
+.inputmask {
+  font-size: large;
+  color: black;
+  text-align: left;
+  outline: none;
+  line-height: normal;
+  transition: all ease-in 0.2s;
+  border: none;
+
+  width: 80%;
+  height: 50px;
+  padding: 5%;
+  border-radius: 100px;
+  cursor: pointer;
+}
+
+.span {
+  color: rgb(227, 47, 47);
+}
+
+button[type="submit"] {
+  width: 20vw;
+  height: 15vh;
+  color: black;
+  padding: 0.5% 0.5% 0.5% 1.5%;
+  cursor: pointer;
+  border: none;
+  border-radius: 20px;
+  position: relative;
+  width: 80%;
+  height: 60px;
+  padding: 5%;
+  border-radius: 100px;
+  margin-bottom: 10px;
+}
+
+.btn {
+  background: linear-gradient(
+    90deg,
+    rgba(101, 26, 26, 0.62),
+    rgb(162, 6, 6),
+    rgb(162, 6, 6),
+    rgba(101, 26, 26, 0.62)
+  );
+}
+
+.submit {
+  background: linear-gradient(
+    90deg,
+    rgba(95, 202, 111, 0.62),
+    rgb(140, 236, 156),
+    rgb(140, 236, 156),
+    rgba(95, 202, 111, 0.62)
+  );
+}
+.nextSubmit {
+  background: linear-gradient(
+    90deg,
+    rgba(8, 147, 29, 0.62),
+    rgb(35, 158, 56),
+    rgb(35, 158, 56),
+    rgba(8, 147, 29, 0.62)
+  );
+}
+.modal {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background: rgb(39, 16, 88);
+  background: linear-gradient(
+    120deg,
+    rgb(24, 11, 69) 0%,
+    rgb(79, 14, 38) 36%,
+    rgb(80, 67, 145) 70%,
+    rgb(53, 11, 80) 92%
+  );
+  border: 1px solid gray;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.7s ease, visibility 0.8s ease;
+
+  transition-delay: 0.8s;
+  transition-property: opacity, visibility;
+
+  transition: opacity 0.3s ease; /* Д
+}
+
+.modal.visible {
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 5s; /* Снятие задержки */
+}
+.modal.visible {
+  opacity: 2; /* Постепенно увеличивать прозрачность при появлении модального окна */
+  visibility: visible;
+  transition-delay: 5s; /* Снятие задержки */
+}
+
+.modal h2 {
+  margin-top: 0;
+  color: black;
+}
+
+.modal p {
+  margin-bottom: 10px;
+}
+
+.modal button {
+  margin-top: 10px;
+}

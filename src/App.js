@@ -1,15 +1,11 @@
 import React from "react";
-import Test2Form from "./components/form2/Test2Form";
-// import Form from "./components/form/Form";
 
-// import TestForm from "./components/form2/TestForm";
+import { Test2Form } from "./components/form2/Test2Form";
 
-export default function App() {
+export function App() {
   return (
     <div>
       <Test2Form />
-      {/* <Form /> */}
-      {/* <TestForm /> */}
     </div>
   );
 }
