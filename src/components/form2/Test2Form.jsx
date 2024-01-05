@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import ReactInputMask from "react-input-mask";
 
 import style from "./Test2Form.module.css";
+import Modal from "../modal/Modal";
+
+
 
 export const Test2Form = () => {
   const [formData, setFormData] = useState({
@@ -160,7 +163,10 @@ export const Test2Form = () => {
     Object.values(errors).every((error) => error === "");
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div className={style.LoginPage__wrapper}>
+      <div className={style.LoginPage__container}>
+    <form className={style.user__card} onSubmit={handleSubmit}>
+         <div className={style.user__circle}></div>
       <div className={style.form}>
         <label>First Name:</label>
         <ReactInputMask
@@ -244,19 +250,13 @@ export const Test2Form = () => {
             : "Заполните все поля ввода"}
         </button>
       </div>
-
-      {showModal && (
-        // <div className={style.modal}>
-        <div className={`${style.modal} ${style.visible}`}>
-          <h2>Отправленные данные</h2>
-          <p>First Name: {submittedData.firstName}</p>
-          <p>Last Name: {submittedData.lastName}</p>
-          <p>Age: {submittedData.age}</p>
-          <p>Telephone: {submittedData.tel}</p>
-          <p>Email: {submittedData.email}</p>
-          <button onClick={() => setShowModal(false)}>Закрыть</button>
-        </div>
-      )}
+      <Modal 
+      showModal={showModal}
+      submittedData={submittedData}
+      onClose={() => setShowModal(false)}
+      />
     </form>
+    </div>
+    </div>
   );
 };
